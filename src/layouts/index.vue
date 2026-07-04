@@ -1,10 +1,10 @@
 <template>
     <aside class="app-aside">
-        <header class="app-header">侧边头部</header>
+        <header class="app-header" data-tauri-drag-region></header>
         <SideNav />
     </aside>
     <div class="app-content" :class="{ expand }">
-        <header class="app-header">
+        <header class="app-header" data-tauri-drag-region>
             <button class="icon" @click="toggleSidebar">
                 <svg><use href="/icons.svg#sidebar-icon" /></svg>
             </button>
@@ -75,26 +75,27 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-$margin: 6px;
+$margin: 3px;
 $aside-width: 250px;
 $header-height: 50px;
 $footer-height: 44px;
+$traffic-light-width: 95px;
 
 .app {
     &-aside {
         position: fixed;
         width: $aside-width;
         padding-top: $header-height;
-        inset: $margin 0;
+        inset: $margin 0 $margin 0;
         overflow: auto;
-        border-radius: 12px;
+        border-radius: 0 0 12px 12px;
         box-sizing: border-box;
         z-index: 99;
     }
 
     &-content {
         position: fixed;
-        inset: $margin $margin $margin $aside-width;
+        inset: $margin $margin $margin $aside-width + $margin;
         padding-top: $header-height;
         padding-bottom: $footer-height;
         border-radius: 12px;
@@ -105,6 +106,10 @@ $footer-height: 44px;
 
         &.expand {
             left: $margin;
+
+            .app-header {
+                padding-left: $traffic-light-width;
+            }
         }
     }
 
@@ -119,6 +124,7 @@ $footer-height: 44px;
         display: flex;
         align-items: center;
         gap: 8px;
+        transition: padding-left 0.3s ease;
 
         &_title {
             flex: 1;
@@ -143,6 +149,9 @@ $footer-height: 44px;
         border-top: 1px solid var(--border);
         text-align: center;
         color: var(--text-gray);
+        padding: 0 15px;
+        box-sizing: border-box;
+        transition: padding-left 0.3s ease;
     }
 }
 
