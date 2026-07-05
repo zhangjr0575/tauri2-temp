@@ -1,6 +1,9 @@
 <template>
-    <aside class="app-aside">
-        <header class="app-header" data-tauri-drag-region></header>
+    <TitleBar v-if="platform === 'windows' || platform === 'linux'" />
+    <aside class="app-aside" :style="layoutStyle">
+        <header class="app-header" data-tauri-drag-region>
+            <Brand v-if="platform == 'web'"/>
+        </header>
         <SideNav />
     </aside>
     <div class="app-content" :class="{ expand }">
@@ -9,9 +12,11 @@
                 <svg><use href="/icons.svg#sidebar-icon" /></svg>
             </button>
             <span class="app-header_title">{{ pageTitle }}</span>
-            <button class="icon" @click="toggleTheme">
-                <svg v-if="isDark"><use href="/icons.svg#sun-icon" /></svg>
-                <svg v-else><use href="/icons.svg#moon-icon" /></svg>
+            <button class="icon light" @click="setTheme('dark')">
+                <svg><use href="/icons.svg#sun-icon" /></svg>
+            </button>
+            <button class="icon dark" @click="setTheme('light')">
+                <svg><use href="/icons.svg#moon-icon" /></svg>
             </button>
         </header>
         <main class="app-main">
@@ -28,92 +33,68 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
+import { setTheme, getPlatform } from '@/helper/system'
+
+import Brand from './components/Brand.vue';
 import SideNav from './components/SideNav.vue'
+import TitleBar from './components/TitleBar.vue'
 
 const route = useRoute()
-const pageTitle = computed(() => route.meta.title || '')
+const platform = getPlatform()
 
 const expand = ref(false)
-const isDark = ref(false)
-
-let userFixedTheme = localStorage.getItem('theme')
-
-const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-
-function applyDark(dark) {
-    isDark.value = dark
-    document.documentElement.classList.toggle('dark', dark)
-}
-
-function onSystemChange(e) {
-    !userFixedTheme && applyDark(e.matches)
-}
+const pageTitle = computed(() => route.meta.title || '')
 
 function toggleSidebar() {
     expand.value = !expand.value
 }
-
-function toggleTheme() {
-    userFixedTheme = isDark.value ? 'light' : 'dark'
-
-    applyDark(!isDark.value)
-    localStorage.setItem('theme', userFixedTheme)
-}
-
-onMounted(() => {
-    applyDark(userFixedTheme ? userFixedTheme === 'dark' : colorScheme.matches)
-    
-    colorScheme.addEventListener('change', onSystemChange)
-})
-
-onUnmounted(() => {
-    colorScheme.removeEventListener('change', onSystemChange)
-})
 </script>
 
 <style lang="scss">
-$margin: 3px;
+$margin: 6px;
 $aside-width: 250px;
 $header-height: 50px;
 $footer-height: 44px;
-$traffic-light-width: 80px;
 
 .app {
     &-aside {
         position: fixed;
         width: $aside-width;
+        inset: $margin auto $margin 0;
         padding-top: $header-height;
-        inset: $margin 0 $margin 0;
-        overflow: auto;
-        border-radius: 0 0 12px 12px;
         box-sizing: border-box;
+        overflow: auto;
         z-index: 99;
 
-        .app-header {
-            padding-left: $traffic-light-width;
+        >.app-header {
+            padding-bottom: $margin;
+            
         }
     }
 
     &-content {
         position: fixed;
-        inset: $margin $margin $margin $aside-width + $margin;
-        padding-top: $header-height;
-        padding-bottom: $footer-height;
-        border-radius: 12px;
+        inset: $margin $margin $margin $aside-width;
+        padding: $header-height 0 $footer-height;
         border: 1px solid var(--border);
+        border-radius: 12px;
         background-color: var(--bg-content);
         transition: left 0.3s ease;
         z-index: 100;
 
         &.expand {
             left: $margin;
+        }
 
-            .app-header {
-                padding-left: $traffic-light-width;
-            }
+        .light {
+            display: block;
+        }
+
+        .dark {
+            display: none;
         }
     }
 
@@ -122,6 +103,7 @@ $traffic-light-width: 80px;
         inset: 0 0 auto 0;
         height: $header-height;
         padding: 0 15px;
+        box-sizing: border-box;
         border-bottom: 1px solid var(--border);
         font-size: 16px;
         font-weight: 500;
@@ -182,6 +164,22 @@ $traffic-light-width: 80px;
     > svg {
         width: 18px;
         height: 18px;
+    }
+}
+
+[data-theme="dark"] {
+    .icon.dark {
+        display: block;
+    }
+
+    .icon.light {
+        display: none;
+    }
+}
+
+[data-platform='macos'] {
+    .expand > .app-header {
+        padding-left: 76px;
     }
 }
 </style>
