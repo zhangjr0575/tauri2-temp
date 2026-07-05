@@ -79,7 +79,7 @@ $margin: 3px;
 $aside-width: 250px;
 $header-height: 50px;
 $footer-height: 44px;
-$traffic-light-width: 95px;
+$traffic-light-width: 80px;
 
 .app {
     &-aside {
@@ -91,6 +91,10 @@ $traffic-light-width: 95px;
         border-radius: 0 0 12px 12px;
         box-sizing: border-box;
         z-index: 99;
+
+        .app-header {
+            padding-left: $traffic-light-width;
+        }
     }
 
     &-content {
