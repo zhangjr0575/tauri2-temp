@@ -1,5 +1,5 @@
 :root {
-  --bg: #f6f6f6;
+  --bg: #f2f2f2;
   --bg-content: #ffffff;
   --text: #333333;
   --text-gray: #6b7280;
@@ -18,10 +18,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 /* , @media(prefers-color-scheme: dark) */
 :root[data-theme=dark] {
-  --bg: #1e1e1e;
-  --bg-content: #18181b;
+    --bg: #262626;
+    --bg-content: #1d1d1d;
   --text: #e4e4e7;
   --text-gray: #a1a1aa;
   --border: #333333;

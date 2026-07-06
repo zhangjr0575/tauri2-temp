@@ -1,6 +1,6 @@
 <template>
     <TitleBar v-if="platform === 'windows' || platform === 'linux'" />
-    <aside class="app-aside" :style="layoutStyle">
+    <aside class="app-aside">
         <header class="app-header" data-tauri-drag-region>
             <Brand v-if="platform == 'web'"/>
         </header>
@@ -26,15 +26,15 @@
                 </keep-alive>
             </router-view>
         </main>
-        <footer class="app-footer">
-            &copy; 2026 My App. All rights reserved.
-        </footer>
+        <footer class="app-footer">{{ COPYRIGHT }}</footer>
     </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+
+import { COPYRIGHT } from '@/config'
 
 import { setTheme, getPlatform } from '@/helper/system'
 
@@ -54,24 +54,21 @@ function toggleSidebar() {
 </script>
 
 <style lang="scss">
-$margin: 6px;
-$aside-width: 250px;
-$header-height: 50px;
-$footer-height: 44px;
+@use './assets/var.scss' as *;
 
 .app {
     &-aside {
         position: fixed;
         width: $aside-width;
-        inset: $margin auto $margin 0;
+        inset: calc($margin + 1px) auto $margin 0;
         padding-top: $header-height;
         box-sizing: border-box;
+        user-select: none;
         overflow: auto;
         z-index: 99;
 
         >.app-header {
             padding-bottom: $margin;
-            
         }
     }
 
@@ -109,6 +106,8 @@ $footer-height: 44px;
         font-weight: 500;
         display: flex;
         align-items: center;
+        box-sizing: border-box;
+        user-select: none;
         gap: 8px;
         transition: padding-left 0.3s ease;
 
@@ -180,6 +179,20 @@ $footer-height: 44px;
 [data-platform='macos'] {
     .expand > .app-header {
         padding-left: 76px;
+    }
+}
+
+[data-platform='windows'], [data-platform='linux'] {
+    .app-aside {
+        top: $titlebar-height;
+        padding-top: 0;
+
+        >.app-header {
+            display: none;
+        }
+    }
+    .app-content {
+        top: $titlebar-height;
     }
 }
 </style>

@@ -60,13 +60,13 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-$titlebar-height: 32px;
-$titlebar-btn-width: 46px;
+@use '../assets/var.scss' as *;
 
 .titlebar {
     position: fixed;
     inset: 0 0 auto;
     height: $titlebar-height;
+    padding-left: 16px;
     z-index: 9999;
     display: flex;
     align-items: center;

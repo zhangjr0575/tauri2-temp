@@ -16,6 +16,7 @@
     "core:window:allow-start-dragging",
     "core:window:allow-is-maximized",
     "core:window:allow-set-focus",
+    "core:app:allow-set-app-theme",
     "core:event:default",
     "os:default"
   ]

@@ -20,7 +20,6 @@ onMounted(async () => {
 .brand {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
 
     &-icon {
         width: 16px;
@@ -29,7 +28,7 @@ onMounted(async () => {
     }
 
     &-name {
-        margin-left: 10px;
+        margin-left: 8px;
         font-size: 12px;
         color: var(--text);
     }
