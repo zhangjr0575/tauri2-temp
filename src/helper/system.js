@@ -7,15 +7,22 @@ const WEB_THEME_LOCAL_KEY = 'theme';
 /**
  * 设置系统主题模式
  * @param { 'dark' | 'light' | 'none } theme 主题模式
+ * @param { boolean } forceUpadte 是否强制更新主题模式
  */
-export async function setTheme(theme) {
-    if (theme === 'none') {
-        document.documentElement.removeAttribute('data-theme');
-    } else {
-        document.documentElement.setAttribute('data-theme', theme);
+export async function setTheme(theme, forceUpadte = true) {
+    if (forceUpadte) {
+        if (theme === 'none') {
+            document.documentElement.removeAttribute('data-theme');
 
-        localStorage.setItem(WEB_THEME_LOCAL_KEY, theme);
+            localStorage.removeItem(WEB_THEME_LOCAL_KEY);
+        } else {
+            document.documentElement.setAttribute('data-theme', theme);
+
+            localStorage.setItem(WEB_THEME_LOCAL_KEY, theme);
+        }
         getPlatform() !== "web" && tauriApp.setTheme(theme);
+    } else if (!localStorage.getItem(WEB_THEME_LOCAL_KEY)) {
+        document.documentElement.setAttribute('data-theme', theme);
     }
 }
 
@@ -26,7 +33,7 @@ export async function setTheme(theme) {
 export function getTheme() {
     const theme = localStorage.getItem(WEB_THEME_LOCAL_KEY);
 
-    return !theme || theme === 'none' ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' : theme;
+    return !theme ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' : theme;
 }
 
 /**
@@ -42,7 +49,6 @@ export function getPlatform() {
  */
 export async function getName() {
     return getPlatform() == 'web' ? APP_NAME : await tauriApp.getName();
-
 }
 
 /**
@@ -51,6 +57,10 @@ export async function getName() {
 export async function init() {
     const platform = getPlatform();
 
-    setTheme(getTheme());
+    setTheme(getTheme(), false);
     document.documentElement.setAttribute('data-platform', platform);
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        setTheme(e.matches ? 'dark' : 'light', false);
+    });
 }
