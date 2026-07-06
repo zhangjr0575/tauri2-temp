@@ -1,4 +1,5 @@
 import * as tauriApp from '@tauri-apps/api/app';
+import { openUrl } from '@tauri-apps/plugin-opener';
 import { APP_NAME } from '@/config';
 
 
@@ -42,6 +43,18 @@ export function getTheme() {
  */
 export function getPlatform() {
     return window.__TAURI_OS_PLUGIN_INTERNALS__ ? window.__TAURI_OS_PLUGIN_INTERNALS__.platform : 'web';
+}
+
+/**
+ * 打开外部链接
+ * @param { string } url 需要打开的链接
+ */
+export async function openExternal(url) {
+    if (getPlatform() === 'web') {
+        window.open(url, '_blank');
+    } else {
+        openUrl(url);
+    }
 }
 
 /**
