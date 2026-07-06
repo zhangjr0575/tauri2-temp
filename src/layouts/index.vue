@@ -90,7 +90,7 @@ function toggleSidebar() {
         }
 
         .light {
-            display: block;
+            display: inline-flex;
         }
 
         .dark {
@@ -171,7 +171,7 @@ function toggleSidebar() {
 
 [data-theme="dark"] {
     .icon.dark {
-        display: block;
+        display: inline-flex;
     }
 
     .icon.light {
