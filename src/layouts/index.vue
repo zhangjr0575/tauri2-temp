@@ -18,6 +18,9 @@
             <button class="icon dark" @click="setTheme('light')">
                 <svg><use href="/icons.svg#moon-icon" /></svg>
             </button>
+            <button class="icon" title="GitHub" @click="openExternal('https://www.github.com')">
+                <svg><use href="/icons.svg#github-icon" /></svg>
+            </button>
         </header>
         <main class="app-main">
             <router-view v-slot="{ Component }">
@@ -36,7 +39,7 @@ import { useRoute } from 'vue-router'
 
 import { COPYRIGHT } from '@/config'
 
-import { setTheme, getPlatform } from '@/helper/system'
+import { setTheme, getPlatform, openExternal } from '@/helper/system'
 
 import Brand from './components/Brand.vue';
 import SideNav from './components/SideNav.vue'

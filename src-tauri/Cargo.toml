@@ -1,5 +1,5 @@
 [package]
-name = "my-project"
+name = "tauri2-temp"
 version = "0.1.0"
 description = "tauri2基础模版"
 authors = ["you"]
@@ -24,3 +24,7 @@ log = "0.4"
 tauri = { version = "2.11.3", features = [] }
 tauri-plugin-log = "2"
 tauri-plugin-os = "2"
+tauri-plugin-opener = "2"
+
+[target.'cfg(any(target_os = "windows", target_os = "macos", target_os = "linux"))'.dependencies]
+tauri-plugin-updater = { version = "2", features = ["rustls-tls", "zip"] }

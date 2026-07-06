@@ -37,6 +37,19 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZGMUMzNkJGMzQ2RjlBNzkKUldSNW1tODB2elljYit2T2d5TmJxcmZYbDZvN2pGVmVqZkxIRzBtZlBBWEtqeUpWaTByTkM1a0UK",
+      "endpoints": [
+        "https://服务器地址/update.json",
+        "https://备用地址/update.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
   }
 }

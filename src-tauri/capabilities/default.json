@@ -6,6 +6,7 @@
     "main"
   ],
   "permissions": [
+    "os:default",
     "core:default",
     "core:window:default",
     "core:window:allow-close",
@@ -18,6 +19,8 @@
     "core:window:allow-set-focus",
     "core:app:allow-set-app-theme",
     "core:event:default",
-    "os:default"
+    
+    "opener:default",
+    "updater:default"
   ]
 }
