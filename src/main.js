@@ -3,16 +3,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import i18n from './locales'
+import setup from './plugins/setup'
 import directives from './plugins/directives'
-
-import { init } from './helper/system.js'
-
-import './style.css'
-
-init()
 
 const app = createApp(App)
 
 app.config.globalProperties.$t = i18n.global.t
 
-app.use(router).use(i18n).use(directives).mount('#app')
+app.use(router).use(i18n).use(setup).use(directives).mount('#app')
