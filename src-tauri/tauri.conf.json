@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "tauri2-temp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "identifier": "com.tauri2-temp.app",
   "build": {
     "frontendDist": "../dist",
