@@ -14,6 +14,7 @@
             <span class="app-header_title">
                 {{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}
             </span>
+            <Updater v-if="platform !== 'web'"/>
             <Language />
             <button class="icon light" @click="setTheme('dark')">
                 <svg><use href="/icons.svg#sun-icon" /></svg>
@@ -48,6 +49,7 @@ import Brand from './components/Brand.vue';
 import SideNav from './components/SideNav.vue'
 import TitleBar from './components/TitleBar.vue'
 import Language from './components/Language.vue'
+import Updater from './components/Updater.vue'
 
 const expand = ref(false)
 const route = useRoute()
@@ -68,7 +70,6 @@ function toggleSidebar() {
         inset: calc($margin + 1px) auto $margin 0;
         padding-top: $header-height;
         box-sizing: border-box;
-        user-select: none;
         overflow: auto;
         z-index: 99;
 
@@ -112,7 +113,6 @@ function toggleSidebar() {
         display: flex;
         align-items: center;
         box-sizing: border-box;
-        user-select: none;
         gap: 8px;
         transition: padding-left 0.3s ease;
 

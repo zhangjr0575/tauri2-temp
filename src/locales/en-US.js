@@ -6,6 +6,13 @@ export default {
     todo: 'To-Do',
     todoToday: "Today's Todo"
   },
+  updater: {
+    checkUpdate: 'Check for Updates',
+    checking: 'Checking...',
+    updateTo: 'Update to v{version}',
+    progress: 'Updating {progress}%',
+    relaunch: 'Restart'
+  },
   page: {
     console: {
       welcome: 'Welcome to the console. This is the system overview.'

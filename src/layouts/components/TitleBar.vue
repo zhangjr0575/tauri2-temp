@@ -71,8 +71,6 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    user-select: none;
-    -webkit-user-select: none;
 
     &-controls {
         display: flex;

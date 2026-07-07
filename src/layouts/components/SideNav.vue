@@ -61,7 +61,6 @@ watch(() => route.path, expandForPath, { immediate: true })
 <style lang="scss">
 .app-nav {
     padding: 12px;
-    user-select: none;
 
     &-item {
         display: flex;
