@@ -8,6 +8,4 @@ import directives from './plugins/directives'
 
 const app = createApp(App)
 
-app.config.globalProperties.$t = i18n.global.t
-
 app.use(router).use(i18n).use(setup).use(directives).mount('#app')
