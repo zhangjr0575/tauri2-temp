@@ -9,18 +9,18 @@ export const routes = [
   {
     name: 'console',
     path: '/console',
-    meta: { title: '控制台' },
+    meta: { title: 'nav.console', i18n: true },
     component: () => import('../views/Console.vue')
   },
   {
     name: 'devices',
     path: '/devices',
-    meta: { title: '我的设备' },
+    meta: { title: 'nav.devices', i18n: true },
     children: [
       {
         name: 'deviceList',
         path: 'list',
-        meta: { title: '设备列表' },
+        meta: { title: 'nav.deviceList', i18n: true },
         component: () => import('../views/DeviceList.vue')
       }
     ]
@@ -28,12 +28,12 @@ export const routes = [
   {
     name: 'todo',
     path: '/todo',
-    meta: { title: '待办事项' },
+    meta: { title: 'nav.todo', i18n: true },
     children: [
       {
         name: 'todoToday',
         path: 'today',
-        meta: { title: '今日待办' },
+        meta: { title: 'nav.todoToday', i18n: true },
         component: () => import('../views/TodayTodo.vue')
       }
     ]
