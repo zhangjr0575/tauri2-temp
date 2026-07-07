@@ -15,6 +15,8 @@ import Layout from './layouts/index.vue';
     font-size: 14px;
     min-height: 100vh;
     color: var(--text);
+    user-select: none;
+    -webkit-user-select: none;
     background-color: var(--bg);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
