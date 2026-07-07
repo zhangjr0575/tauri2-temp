@@ -2,7 +2,7 @@
  * 软件更新
  */
 import { check } from '@tauri-apps/plugin-updater';
-import { relaunch } from '@tauri-apps/plugin-process';
+export { relaunch } from '@tauri-apps/plugin-process';
 
 const PLATFORM = window.__TAURI_OS_PLUGIN_INTERNALS__ ? window.__TAURI_OS_PLUGIN_INTERNALS__.platform : 'web';
 
@@ -13,7 +13,7 @@ const PLATFORM = window.__TAURI_OS_PLUGIN_INTERNALS__ ? window.__TAURI_OS_PLUGIN
  * 
  * @returns { 0 | -1 | 1 } 0表示版本号相同, -1表示v1 < v2, 1表示v1 > v2
  */
-export function  compareVersion(v1, v2) {
+export function compareVersion(v1, v2) {
     const _v1 = v1.split("."), _v2 = v2.split("."), length = Math.max(_v1.length, _v2.length);
 
     for (let i = 0; i < length; i++) {
@@ -27,7 +27,8 @@ export function  compareVersion(v1, v2) {
 
 /**
  * 检查是否有最新版本
- * @returns {string} 最新版本版本号
+ * 
+ * @returns {Promise<void | string>}
  */
 export async function checkUpdate() {
     if (PLATFORM == "web") throw TypeError('Currently, the web platform is not supported');
@@ -45,7 +46,7 @@ export async function checkUpdate() {
  * 安装更新, 
  * 
  * @param {(info: {total: Number; downloaded: Number; progress: Number}) => void} progressCallback 安装进度回调函数
- * @return {Promise<void>}
+ * @returns {Promise<void>}
  */
 export async function installUpdate(progressCallback) {
     if (PLATFORM == "web") throw TypeError('Currently, the web platform is not supported');
@@ -54,24 +55,26 @@ export async function installUpdate(progressCallback) {
 
     const info = { total: 0, downloaded: 0, progress: 0 };
 
-    return window.__TAURI_UPDATE.downloadAndInstall((event) => {
-        switch (event.event) {
-            case 'Started':
-                info.total = event.data.contentLength || 0;
-                break;
-            case 'Progress':
-                info.downloaded += event.data.chunkLength;
+    return new Promise((resolve, reject) => {
+        window.__TAURI_UPDATE.downloadAndInstall(({ event, data }) => {
+            switch (event) {
+                case 'Started':
+                    info.total = data.contentLength || 0;
+                    break;
+                case 'Progress':
+                    info.downloaded += data.chunkLength;
+                    info.progress = Math.min(100, Math.round((info.downloaded / info.total) * 100));
 
-                typeof progressCallback === "function" && progressCallback(Math.min(100, Math.round((info.downloaded / info.total) * 100)));
-                break;
-            case 'Finished':
-                typeof progressCallback === "function" && progressCallback(100);
-                break;
-        }
+                    typeof progressCallback === "function" && progressCallback(info);
+                    break;
+                case 'Finished':
+                    info.progress = 100;
+                    info.downloaded = info.total;
+
+                    typeof progressCallback === "function" && progressCallback(info);
+                    resolve();
+                    break;
+            }
+        }).catch(reject);
     });
 }
-
-/**
- * 重启应用
- */
-export const relaunchApp = relaunch

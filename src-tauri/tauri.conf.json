@@ -44,8 +44,7 @@
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZGMUMzNkJGMzQ2RjlBNzkKUldSNW1tODB2elljYit2T2d5TmJxcmZYbDZvN2pGVmVqZkxIRzBtZlBBWEtqeUpWaTByTkM1a0UK",
       "endpoints": [
-        "https://服务器地址/update.json",
-        "https://备用地址/update.json"
+        "https://github.com/zhangjr0575/tauri2-temp/releases/latest/download/latest.json"
       ],
       "windows": {
         "installMode": "passive"
