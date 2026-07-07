@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: install pnpm
-        uses: pnpm/action-setup@v10
+        uses: pnpm/action-setup@v5
         with:
           run_install: false
 
