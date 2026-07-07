@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "tauri2基础模版",
+  "productName": "tauri2-temp",
   "version": "1.0.0",
   "identifier": "com.tauri2-temp.app",
   "build": {

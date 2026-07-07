@@ -14,13 +14,13 @@
             <span class="app-header_title">
                 {{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}
             </span>
+            <Language />
             <button class="icon light" @click="setTheme('dark')">
                 <svg><use href="/icons.svg#sun-icon" /></svg>
             </button>
             <button class="icon dark" @click="setTheme('light')">
                 <svg><use href="/icons.svg#moon-icon" /></svg>
             </button>
-            <Language/>
             <button v-if="GITHUB_URL" class="icon" @click="openExternal(GITHUB_URL)">
                 <svg><use href="/icons.svg#github-icon" /></svg>
             </button>

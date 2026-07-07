@@ -1,0 +1,17 @@
+:root {
+    --bg: #f2f2f2;
+    --bg-content: #ffffff;
+    --text: #333333;
+    --text-gray: #6b7280;
+    --border: #ebebeb;
+    --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+}
+
+:root[data-theme=dark] {
+    --bg: #262626;
+    --bg-content: #1d1d1d;
+    --text: #e4e4e7;
+    --text-gray: #a1a1aa;
+    --border: #333333;
+    --shadow: rgba(0, 0, 0, 0.3) 0 10px 15px -3px, rgba(0, 0, 0, 0.2) 0 4px 6px -2px;
+}
