@@ -37,8 +37,6 @@ export function setLocale(lang) {
   localStorage.setItem(LOCAL_KEY, lang)
 }
 
-console.log(i18n.global);
-
 export function getCurrentLocale() {
   return i18n.global.locale.value
 }
