@@ -14,7 +14,7 @@
             <span class="app-header_title">
                 {{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}
             </span>
-            <Updater v-if="platform !== 'web'"/>
+            <Updater v-if="platform !== 'web'" auto />
             <Language />
             <button class="icon light" @click="setTheme('dark')">
                 <svg><use href="/icons.svg#sun-icon" /></svg>
