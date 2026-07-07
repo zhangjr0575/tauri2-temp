@@ -3,7 +3,7 @@
         <template v-for="item in routes" :key="item.name">
             <template v-if="item.children">
                 <div class="app-nav-item" @click="toggle(item.name)">
-                    <span class="app-nav-item-title">{{ item.meta.title }}</span>
+                    <span class="app-nav-item-title">{{ item.meta.i18n ? t(item.meta.title) : item.meta.title }}</span>
                     <svg class="app-nav-arrow" :class="{ open: openGroups.includes(item.name) }">
                         <use href="/icons.svg#chevron-icon" />
                     </svg>
@@ -11,21 +11,22 @@
                 <div class="app-nav-item-group" v-show="openGroups.includes(item.name)">
                     <template v-for="child in item.children" :key="child.name">
                         <router-link class="app-nav-item" v-if="!child.meta?.hidden" :to="resolvePath(item.path, child.path)" >
-                            <span class="app-nav-item-title">{{ child.meta.title }}</span>
+                            <span class="app-nav-item-title">{{ child.meta.i18n ? t(child.meta.title) : child.meta.title }}</span>
                         </router-link>
                     </template>
                 </div>
             </template>
             <router-link class="app-nav-item" v-else-if="!item.meta?.hidden" :to="item.path">
-                <span class="app-nav-item-title">{{ item.meta.title }}</span>
+                <span class="app-nav-item-title">{{ item.meta.i18n ? t(item.meta.title) : item.meta.title }}</span>
             </router-link>
         </template>
     </nav>
 </template>
 
 <script setup>
-import { reactive, computed, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { t } from '@/locales';
 import { routes } from '../../router';
 
 const route = useRoute();
@@ -54,7 +55,7 @@ function expandForPath(path) {
     }
 }
 
-watch(() => route.path, expandForPath)
+watch(() => route.path, expandForPath, { immediate: true })
 </script>
 
 <style lang="scss">

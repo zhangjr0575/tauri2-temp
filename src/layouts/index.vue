@@ -11,14 +11,17 @@
             <button class="icon" @click="toggleSidebar">
                 <svg><use href="/icons.svg#sidebar-icon" /></svg>
             </button>
-            <span class="app-header_title">{{ pageTitle }}</span>
+            <span class="app-header_title">
+                {{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}
+            </span>
             <button class="icon light" @click="setTheme('dark')">
                 <svg><use href="/icons.svg#sun-icon" /></svg>
             </button>
             <button class="icon dark" @click="setTheme('light')">
                 <svg><use href="/icons.svg#moon-icon" /></svg>
             </button>
-            <button class="icon" title="GitHub" @click="openExternal('https://www.github.com')">
+            <Language/>
+            <button v-if="GITHUB_URL" class="icon" @click="openExternal(GITHUB_URL)">
                 <svg><use href="/icons.svg#github-icon" /></svg>
             </button>
         </header>
@@ -34,22 +37,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { COPYRIGHT } from '@/config'
+import { COPYRIGHT, GITHUB_URL } from '@/config'
 
 import { setTheme, getPlatform, openExternal } from '@/helper/system'
 
 import Brand from './components/Brand.vue';
 import SideNav from './components/SideNav.vue'
 import TitleBar from './components/TitleBar.vue'
-
-const route = useRoute()
-const platform = getPlatform()
+import Language from './components/Language.vue'
 
 const expand = ref(false)
-const pageTitle = computed(() => route.meta.title || '')
+const route = useRoute()
+const platform = getPlatform()
 
 function toggleSidebar() {
     expand.value = !expand.value

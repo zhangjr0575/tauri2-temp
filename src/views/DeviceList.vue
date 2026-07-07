@@ -1,11 +1,9 @@
 <template>
-  <div class="page-device-list">
-    <p>这里是设备列表页面。</p>
+  <div class="page">
+    {{ $t('page.deviceList.title') }}
   </div>
 </template>
 
-<style lang="scss">
-.page-device-list {
-  padding: 20px;
-}
-</style>
+<script setup>
+
+</script>

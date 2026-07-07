@@ -2,7 +2,7 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "tauri2基础模版",
   "version": "0.1.0",
-  "identifier": "com.myproject.app",
+  "identifier": "com.tauri2-temp.app",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
