@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { checkUpdate, installUpdate, relaunch } from '@/helper/updater'
 
 const props = defineProps({
@@ -35,6 +35,10 @@ async function onHandle() {
     }
     loading.value = false
 }
+
+onMounted(async () => {
+    props.auto && (latestVersion.value = await checkUpdate())
+})
 </script>
 
 <style lang="scss" scoped>
@@ -49,6 +53,10 @@ async function onHandle() {
     color: #fff;
     font-size: 12px;
     cursor: pointer;
+
+    &:empty {
+        display: none;
+    }
 
     &:hover:not([disabled='true']) {
         opacity: 0.8;
