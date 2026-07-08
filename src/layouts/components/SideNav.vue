@@ -5,7 +5,7 @@
                 <div class="app-nav-item" @click="toggle(item.name)">
                     <span class="app-nav-item-title">{{ item.meta.i18n ? t(item.meta.title) : item.meta.title }}</span>
                     <svg class="app-nav-arrow" :class="{ open: openGroups.includes(item.name) }">
-                        <use href="/icons.svg#chevron-icon" />
+                        <use href="/icons.svg#right" />
                     </svg>
                 </div>
                 <div class="app-nav-item-group" v-show="openGroups.includes(item.name)">

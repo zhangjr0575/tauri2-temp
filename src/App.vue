@@ -28,4 +28,30 @@ body {
 .page {
   padding: 15px;
 }
+
+.svg-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-gray);
+  background: transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--border);
+    color: var(--text);
+  }
+
+  >svg {
+    width: 18px;
+    height: 18px;
+  }
+}
 </style>

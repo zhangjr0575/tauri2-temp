@@ -23,5 +23,23 @@ export default {
     todayTodo: {
       title: "This is today's todo page."
     }
+  },
+  packages: {
+    select: {
+      placeholder: 'Please select',
+      emptyPlaceholder: 'No data available'
+    }
+  },
+  settings: {
+    title: 'Settings',
+    general: 'General',
+    about: 'About { appName }',
+    theme: 'Theme',
+    themePlaceholder: 'Choose which theme the application interface should use',
+    themeSystem: 'System',
+    themeLight: 'Light',
+    themeDark: 'Dark',
+    language: 'Language',
+    languagePlaceholder: 'Choose the display language used by the application UI'
   }
 }
