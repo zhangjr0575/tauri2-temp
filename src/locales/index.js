@@ -8,16 +8,6 @@ const LOCAL_KEY = 'locale', LOCALE_INFO_MAP = {
   'en-US': { icon: '🇺🇸', label: 'English'}
 }
 
-function getLocale() {
-  const saved = localStorage.getItem(LOCAL_KEY)
-
-  if (saved) return saved
-
-  const lang = navigator.language || 'zh-CN'
-
-  return lang.startsWith('zh') ? 'zh-CN' : 'en-US'
-}
-
 const i18n = createI18n({
   legacy: false,
   locale: getLocale(),
@@ -28,17 +18,26 @@ const i18n = createI18n({
   }
 })
 
-export const t = i18n.global.t
-export const locale = i18n.global.locale
-export const AVAILABLE_LOCALES = Object.freeze(i18n.global.availableLocales.map(value => ({ value, ...LOCALE_INFO_MAP[value]})))
-
 export function setLocale(lang) {
   i18n.global.locale.value = lang
+  
   localStorage.setItem(LOCAL_KEY, lang)
 }
 
-export function getCurrentLocale() {
-  return i18n.global.locale.value
+export function getLocale() {
+  const saved = localStorage.getItem(LOCAL_KEY)
+
+  if (saved) return saved
+
+  const lang = navigator.language || 'zh-CN'
+
+  return lang.startsWith('zh') ? 'zh-CN' : 'en-US'
 }
+
+export const t = i18n.global.t
+
+export const locale = i18n.global.locale
+
+export const AVAILABLE_LOCALES = Object.freeze(i18n.global.availableLocales.map(value => ({ value, ...LOCALE_INFO_MAP[value]})))
 
 export default i18n

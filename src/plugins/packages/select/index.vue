@@ -65,7 +65,9 @@ const emit = defineEmits(['update:modelValue', 'change'])
 const visible = ref(false)
 
 // 兼容 { label, value } 结构与原始值两种写法
-const normalizedOptions = computed(() =>props.options.map((item) => typeof item === 'object' && item !== null ? item : { label: item, value: item }))
+const normalizedOptions = computed(() => {
+    return props.options.map((item) => typeof item === 'object' && item !== null ? item : { label: item, value: item })
+})
 const isEmpty = computed(() => props.modelValue === '' || props.modelValue === null || props.modelValue === undefined)
 const currentOption = computed(() => normalizedOptions.value.find((item) => item.value === props.modelValue) || null)
 
@@ -73,13 +75,16 @@ function toggle() {
     if (props.disabled) return
     visible.value = !visible.value
 }
+
 function open() {
     if (props.disabled) return
     visible.value = true
 }
+
 function close() {
     visible.value = false
 }
+
 function onSelect(item) {
     if (item.disabled) return
 
@@ -89,6 +94,7 @@ function onSelect(item) {
     }
     close()
 }
+
 function clear() {
     emit('update:modelValue', '')
     emit('change', '')

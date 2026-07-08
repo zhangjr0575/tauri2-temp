@@ -34,6 +34,7 @@ export default {
     title: 'Settings',
     general: 'General',
     about: 'About { appName }',
+    basic: 'Basic Settings',
     theme: 'Theme',
     themePlaceholder: 'Choose which theme the application interface should use',
     themeSystem: 'System',

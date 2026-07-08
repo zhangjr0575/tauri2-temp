@@ -34,6 +34,7 @@ export default {
     title: '设置',
     general: '通用',
     about: '关于{ appName }',
+    basic: '基础设置',
     theme: '主题模式',
     themePlaceholder: '切换应用界面使用的主题外观',
     themeSystem: '跟随系统',

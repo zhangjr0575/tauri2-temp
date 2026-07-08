@@ -2,7 +2,7 @@
     <Teleport to="body">
         <transition name="fade">
             <div v-if="visible" class="dialog-overlay" @click.self="close">
-                <div class="dialog" :style="{ width }" @click.stop>
+                <div class="dialog" :style="{ width }">
                     <button class="svg-icon dialog-close" @click="close">
                         <svg><use href="/icons.svg#close" /></svg>
                     </button>
@@ -60,7 +60,7 @@ defineOptions({ name: 'Dialog' })
 .dialog-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,12 +82,6 @@ defineOptions({ name: 'Dialog' })
         top: 10px;
         right: 10px;
         z-index: 10;
-    }
-}
-
-[data-theme="dark"] {
-    .dialog-overlay {
-        background: rgba(0, 0, 0, 0.6);
     }
 }
 </style>

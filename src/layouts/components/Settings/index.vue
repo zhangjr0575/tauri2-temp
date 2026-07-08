@@ -2,7 +2,7 @@
     <button class="svg-icon" @click="dialogRef.open()">
         <svg><use href="/icons.svg#settings" /></svg>
     </button>
-    <Dialog ref="dialogRef" width="660px">
+    <Dialog ref="dialogRef" width="680px">
         <div style="height: 500px; display: flex;">
             <aside class="settings-sidebar">
                 <div class="settings-sidebar-title">{{ $t('settings.title') }}</div>
@@ -39,10 +39,10 @@ const categories = [
 </script>
 
 <style lang="scss">
-$sidebar-width: 180px;
+$sidebarWidth: 180px;
 
 .settings-sidebar {
-    width: $sidebar-width;
+    width: $sidebarWidth;
     padding: 0 10px 10px;
     box-sizing: border-box;
     background-color: var(--bg);
@@ -80,22 +80,25 @@ $sidebar-width: 180px;
 
 .settings-content {
     position: absolute;
-    inset: 40px 0 0 $sidebar-width;
+    inset: 45px 2px 15px $sidebarWidth;
+    padding: 0 15px 0 17px;
     overflow: auto;
     background-color: var(--bg-content);
 }
 
 .settings-item {
-    padding: 20px;
-    margin-bottom: 24px;
 
     &-label {
+        position: sticky;
+        top: 0;
+        z-index: 99;
         display: block;
-        height: 40px;
-        line-height: 40px;
+        height: 44px;
+        line-height: 44px;
         font-size: 13px;
         font-weight: 500;
         color: var(--text-gray);
+        background-color: var(--bg-content);
     }
 
     &-box {

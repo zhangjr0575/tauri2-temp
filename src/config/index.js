@@ -1,5 +1,5 @@
 // 应用名称
-export const APP_NAME = "tauri2基础模版";
+export const APP_NAME = "tauri2-temp";
 
 // 应用版本
 export const VERSION = "1.0.1";
