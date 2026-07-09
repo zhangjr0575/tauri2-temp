@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "tauri2基础模版",
+        "title": "tauri2-temp",
         "width": 1200,
         "height": 800,
         "minWidth": 800,

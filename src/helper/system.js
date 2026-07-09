@@ -22,7 +22,7 @@ export async function setTheme(theme, forceUpadte = true) {
             localStorage.setItem(WEB_THEME_LOCAL_KEY, theme);
         }
         getPlatform() !== "web" && tauriApp.setTheme(theme);
-    } else if (!localStorage.getItem(WEB_THEME_LOCAL_KEY)) {
+    } else {
         document.documentElement.setAttribute('data-theme', theme);
     }
 }

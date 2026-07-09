@@ -8,22 +8,21 @@
     </aside>
     <div class="app-content" :class="{ expand }">
         <header class="app-header" data-tauri-drag-region>
-            <button class="icon" @click="toggleSidebar">
-                <svg><use href="/icons.svg#sidebar-icon" /></svg>
+            <button class="svg-icon" @click="toggleSidebar">
+                <svg><use href="/icons.svg#sidebar" /></svg>
             </button>
-            <span class="app-header_title">
-                {{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}
-            </span>
+            <span class="app-header_title">{{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}</span>
             <Updater v-if="platform !== 'web'" auto />
             <Language />
-            <button class="icon light" @click="setTheme('dark')">
-                <svg><use href="/icons.svg#sun-icon" /></svg>
+            <button class="svg-icon light" @click="setTheme('dark')">
+                <svg><use href="/icons.svg#sun" /></svg>
             </button>
-            <button class="icon dark" @click="setTheme('light')">
-                <svg><use href="/icons.svg#moon-icon" /></svg>
+            <button class="svg-icon dark" @click="setTheme('light')">
+                <svg><use href="/icons.svg#moon" /></svg>
             </button>
-            <button v-if="GITHUB_URL" class="icon" @click="openExternal(GITHUB_URL)">
-                <svg><use href="/icons.svg#github-icon" /></svg>
+            <Settings />
+            <button v-if="GITHUB_URL" class="svg-icon" @click="openExternal(GITHUB_URL)">
+                <svg><use href="/icons.svg#github" /></svg>
             </button>
         </header>
         <main class="app-main">
@@ -45,10 +44,11 @@ import { COPYRIGHT, GITHUB_URL } from '@/config'
 
 import { setTheme, getPlatform, openExternal } from '@/helper/system'
 
-import Brand from './components/Brand.vue';
+import Brand from './components/Brand.vue'
 import SideNav from './components/SideNav.vue'
 import TitleBar from './components/TitleBar.vue'
 import Language from './components/Language.vue'
+import Settings from './components/Settings/index.vue'
 import Updater from './components/Updater.vue'
 
 const expand = ref(false)
@@ -145,38 +145,14 @@ function toggleSidebar() {
     }
 }
 
-.icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    border: none;
-    border-radius: 6px;
-    background: transparent;
-    color: var(--text-gray);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background 0.15s ease, color 0.15s ease;
 
-    &:hover {
-        background: var(--border);
-        color: var(--text);
-    }
-
-    > svg {
-        width: 18px;
-        height: 18px;
-    }
-}
 
 [data-theme="dark"] {
-    .icon.dark {
+    .svg-icon.dark {
         display: inline-flex;
     }
 
-    .icon.light {
+    .svg-icon.light {
         display: none;
     }
 }

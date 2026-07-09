@@ -1,7 +1,7 @@
 [package]
 name = "tauri2-temp"
 version = "1.0.1"
-description = "tauri2基础模版"
+description = "tauri2-temp"
 authors = ["you"]
 license = ""
 repository = ""

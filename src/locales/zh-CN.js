@@ -23,5 +23,24 @@ export default {
     todayTodo: {
       title: '这里是今日待办页面。'
     }
+  },
+  packages: {
+    select: {
+      placeholder: '请选择',
+      emptyPlaceholder: '暂无数据'
+    }
+  },
+  settings: {
+    title: '设置',
+    general: '通用',
+    about: '关于{ appName }',
+    basic: '基础设置',
+    theme: '主题模式',
+    themePlaceholder: '切换应用界面使用的主题外观',
+    themeSystem: '跟随系统',
+    themeLight: '浅色',
+    themeDark: '深色',
+    language: '语言',
+    languagePlaceholder: '选择应用 UI 的显示语言'
   }
 }

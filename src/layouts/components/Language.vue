@@ -1,7 +1,7 @@
 <template>
     <div class="lang-switch" v-clickOutside="closeMenu">
-        <button class="icon lang-btn" @click="openMenu">
-            <svg><use href="/icons.svg#globe-icon" /></svg>
+        <button class="svg-icon lang-btn" @click="openMenu">
+            <svg><use href="/icons.svg#globe" /></svg>
         </button>
         <transition name="fade">
             <div v-if="menuVisible" class="lang-menu" @click.stop>
