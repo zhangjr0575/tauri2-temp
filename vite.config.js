@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
-  base: './',
+  base: `./${process.env.NODE_ENV === 'production' ? '' : 'tauri2-temp'}`,
   plugins: [vue()],
   clearScreen: false,
   server: {
