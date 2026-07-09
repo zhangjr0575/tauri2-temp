@@ -56,16 +56,34 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install
 
+      - name: Get version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Read changelog
         id: changelog
+        shell: bash
         run: |
-          CONTENT=$(awk -v ver="${{ steps.version.outputs.version }}" '
+          VER="${{ steps.version.outputs.version }}"
+          CONTENT=$(awk -v ver="$VER" '
             $0 ~ "^## \\[" ver "\\]" {found=1; next}
             found && /^## / {exit}
             found {print}
           ' CHANGELOG.md)
-          echo "content<<EOF" >> $GITHUB_OUTPUT
-          echo "$CONTENT" >> $GITHUB_OUTPUT
+
+          if [ -z "$CONTENT" ]; then
+            CONTENT="No changelog entry found for version $VER"
+          fi
+
+          DELIMITER=$(openssl rand -hex 8)
+          {
+            echo "content<<$DELIMITER"
+            echo "$CONTENT"
+            echo "$DELIMITER"
+          } >> "$GITHUB_OUTPUT"
 
       - uses: tauri-apps/tauri-action@v1
         env:
