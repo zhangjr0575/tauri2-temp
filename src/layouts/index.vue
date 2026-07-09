@@ -11,18 +11,16 @@
             <button class="svg-icon" @click="toggleSidebar">
                 <svg><use href="/icons.svg#sidebar" /></svg>
             </button>
-            <span class="app-header_title">
-                {{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}
-            </span>
+            <span class="app-header_title">{{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}</span>
             <Updater v-if="platform !== 'web'" auto />
             <Language />
-            <Settings />
             <button class="svg-icon light" @click="setTheme('dark')">
                 <svg><use href="/icons.svg#sun" /></svg>
             </button>
             <button class="svg-icon dark" @click="setTheme('light')">
                 <svg><use href="/icons.svg#moon" /></svg>
             </button>
+            <Settings />
             <button v-if="GITHUB_URL" class="svg-icon" @click="openExternal(GITHUB_URL)">
                 <svg><use href="/icons.svg#github" /></svg>
             </button>

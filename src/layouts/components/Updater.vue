@@ -47,12 +47,13 @@ onMounted(async () => {
     align-items: center;
     padding: 0 10px;
     height: 24px;
+    line-height: 24px;
     border: none;
     border-radius: 6px;
-    background: var(--primary);
     color: #fff;
     font-size: 12px;
     cursor: pointer;
+    background-color: var(--primary);
 
     &:empty {
         display: none;

@@ -2,13 +2,32 @@
     <div class="settings-about">
         <img class="settings-about-icon" src="/icon.png" />
         <div class="settings-about-name">{{ APP_NAME }}</div>
-        <div class="settings-about-version">v{{ VERSION }}</div>
-        <div class="settings-about-copyright">{{ COPYRIGHT }}</div>
+    </div>
+    <div class="settings-item">
+        <div class="settings-item-box">
+            <div class="settings-item-row">
+                <div class="settings-item-row-title">
+                    版本信息
+                    <div class="settings-item-row-title-place">v{{ VERSION }}(20260102)</div>
+                </div>
+                <Updater />
+            </div>
+            <div v-if="GITHUB_URL" class="settings-item-row external-link" @click="openExternal(GITHUB_URL)">
+                <div class="settings-item-row-title">开源地址</div>
+                <button class="svg-icon">
+                    <svg><use href="/icons.svg#open-link" /></svg>
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { APP_NAME, VERSION, COPYRIGHT } from '@/config'
+import { APP_NAME, VERSION, GITHUB_URL } from '@/config'
+
+import { openExternal } from '@/helper/system.js'
+
+import Updater from '../../Updater.vue'
 </script>
 
 <style lang="scss">
@@ -17,7 +36,7 @@ import { APP_NAME, VERSION, COPYRIGHT } from '@/config'
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 280px;
+    min-height: 180px;
     text-align: center;
 
     &-icon {
@@ -34,15 +53,13 @@ import { APP_NAME, VERSION, COPYRIGHT } from '@/config'
     }
 
     &-version {
+        margin-top: 4px;
         font-size: 13px;
         color: var(--text-gray);
-        margin-top: 4px;
     }
+}
 
-    &-copyright {
-        font-size: 12px;
-        color: var(--text-gray);
-        margin-top: 16px;
-    }
+.external-link {
+    cursor: pointer;
 }
 </style>
