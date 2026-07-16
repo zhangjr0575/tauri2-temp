@@ -9,7 +9,7 @@
     <div class="app-content" :class="{ expand }">
         <header class="app-header" data-tauri-drag-region>
             <button class="svg-icon" @click="toggleSidebar">
-                <svg><use href="/icons.svg#sidebar" /></svg>
+                <svg><use :href="`/icons.svg#sidebar${expand ? '-expand' : ''}`" /></svg>
             </button>
             <span class="app-header_title">{{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}</span>
             <Updater v-if="platform !== 'web'" auto />
