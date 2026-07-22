@@ -11,7 +11,7 @@
             <button class="svg-icon" @click="toggleSidebar">
                 <svg><use :href="`/icons.svg#sidebar${expand ? '-expand' : ''}`" /></svg>
             </button>
-            <span class="app-header_title">{{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}</span>
+            <span class="app-header_title" data-tauri-drag-region>{{ route.meta.i18n ? $t(route.meta.title) : route.meta.title }}</span>
             <Updater v-if="platform !== 'web'" auto />
             <Language />
             <button class="svg-icon light" @click="setTheme('dark')">
